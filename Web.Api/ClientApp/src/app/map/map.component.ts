@@ -1,16 +1,19 @@
 import {Component, OnInit } from '@angular/core';
 import ymaps from 'ymaps';
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
+
 export class MapComponent implements OnInit {
-  constructor() { }
+
+  constructor(private _router: Router) { }
 
   ngOnInit() {
-    async function showMap() {
+    async function showMap(router) {
       const app = document.getElementById("app");
       const maps = await ymaps.load();
       const mapContainer = document.createElement("div");
@@ -170,12 +173,14 @@ export class MapComponent implements OnInit {
       };
 
       let objectManager = new maps.ObjectManager({ clusterize: true });
-      objectManager.events.add(['click'], function(event){
-        console.log(event.get('objectId'))
+      objectManager.events.add(['click'], (event) => {
+        let districtId = (event.get('objectId'));
+        router.navigate(['districts', districtId]);
       });
       objectManager.add(collection);
       myMap.geoObjects.add(objectManager);
     }
-    showMap();
+    showMap(this._router);
   }
+
 }

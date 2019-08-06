@@ -1,1 +1,29 @@
-<p>districts works!</p>
+<div class="districts-wrapper">
+  <header>
+    <h2> {{selectedDistrict}} disctrict</h2>
+    <hr/>
+  </header>
+
+  <section class="district-content">
+    <table>
+      <thead>
+        <tr>
+          <th>Start of crime</th>
+          <th>End of Crime</th>
+          <th>Location</th>
+          <th>Crime</th>
+          <th>Сriminal</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let crime of criminalData" (click)="showCriminalInfo(crime)">
+            <td>{{crime.start_time}}</td>
+            <td>{{crime.end_time}}</td>
+            <td>{{crime.location}}</td>
+            <td>{{crime.crime}}</td>
+            <td>{{crime.criminal}}</td>
+          </tr>
+      </tbody>
+    </table>
+  </section>
+</div>

@@ -1,0 +1,42 @@
+.districts-wrapper {
+  padding: 15px 20px;
+
+  header {
+    margin-bottom: 50px;
+    position: relative;
+    text-align: center;
+    hr {
+      position: absolute;
+      top: 26px;
+      left: 70px;
+      right: 70px;
+      z-index: -1
+    }
+    h2 {
+      display: inline-block;
+      background: #fff;
+      padding: 0 23px;
+    }
+  }
+
+  .district-content {
+    border-radius: 4px;
+    box-shadow: 1px 1px 12px #cecece;
+    padding: 24px;
+    text-align: center;
+
+    table {
+      border-spacing: 0;
+      th {
+        border-bottom: 1px solid #cecece;
+        padding-bottom: 15px;
+      }
+      td {
+        padding: 12px 5px;
+        border-bottom: 1px solid #cecece;
+      }
+      width: 100%;
+
+    }
+  }
+}

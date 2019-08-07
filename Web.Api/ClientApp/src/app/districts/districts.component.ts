@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from '../modal/modal.component';
+
 
 @Component({
   selector: 'app-districts',
@@ -10,8 +12,8 @@ import { ModalComponent } from '../modal/modal.component';
 
 export class DistrictsComponent implements OnInit {
   private districtId: string;
-  private _modal: ModalComponent
-  
+  closeResult: string;
+
   private districtsMap: object = {
     '0': 'Kastrichnickiy',
     '1': 'Leninskiy',
@@ -26,8 +28,13 @@ export class DistrictsComponent implements OnInit {
   private selectedDistrict: string;
 
   showCriminalInfo(info: object): void {
-    console.log(info)
-    console.log(this._modal)
+    console.log(info);
+
+    this.modalService.open(ModalComponent, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
   }
 
   criminalData = [
@@ -53,11 +60,20 @@ export class DistrictsComponent implements OnInit {
       criminal: 'Alex Cameron Broskow'
     }
   ];
-  constructor(private _activatedRoute: ActivatedRoute) { }
+  constructor(private _activatedRoute: ActivatedRoute, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.districtId = this._activatedRoute.snapshot.paramMap.get("id");
     this.selectedDistrict = this.districtsMap[this.districtId];
   }
 
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
 }

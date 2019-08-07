@@ -20,6 +20,7 @@ import { ModalComponent } from './modal/modal.component';
     DistrictsComponent,
     ModalComponent
   ],
+  entryComponents: [ModalComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
